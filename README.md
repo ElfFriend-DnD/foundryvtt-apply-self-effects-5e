@@ -11,6 +11,8 @@
 
 This module applies all Temporary Effects on an Item which targets "self" to the actor owning the item when that item is rolled. If there are effects from the item already on the Actor, but disabled, it will prefer to enable those.
 
+https://user-images.githubusercontent.com/7644614/150699144-1c5a63b7-a98d-42f0-ae01-566ba22215b7.mp4
+
 ## Compatibility
 
 Requires More Hooks 5e
