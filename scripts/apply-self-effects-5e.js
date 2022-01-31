@@ -16,7 +16,7 @@ class ApplySelfEffects5e {
    * @returns 
    */
    static handleItemRoll = async (item) => {
-    if (item.data.data.target.type !== 'self' || !item.effects.size) {
+    if (item.data.data.target?.type !== 'self' || !item.effects.size) {
       return;
     }
 
