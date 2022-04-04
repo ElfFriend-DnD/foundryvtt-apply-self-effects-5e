@@ -13,7 +13,7 @@
       "patreon": "ElfFriend_DnD"
     }
   ],
-  "system": [ "dnd5e" ],
+  "system": [ "dnd5e", "sw5e" ],
   "scripts": [
     "./scripts/apply-self-effects-5e.js"
   ],
