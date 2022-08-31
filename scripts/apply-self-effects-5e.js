@@ -9,14 +9,14 @@ class ApplySelfEffects5e {
   }
   
   /**
-   * When an item that targets self is rolled:
+   * When an item that targets self is used:
    * if the parent actor has any disabled temporary effects from this item, activate them
    * otherwise apply any temporary effects to the parent actor
    * @param {*} item 
    * @returns 
    */
-   static handleItemRoll = async (item) => {
-    if (item.data.data.target?.type !== 'self' || !item.effects.size) {
+   static handleUseItem = async (item) => {
+    if (item.system.target?.type !== 'self' || !item.effects.size) {
       return;
     }
 
@@ -29,8 +29,8 @@ class ApplySelfEffects5e {
     this.log('apply this to the parent', item, actor);
 
     const existingDisabledEffects = actor.effects.filter((effect) => {
-      const isFromThisItem = effect.data.origin === item.uuid;
-      const isDisabled = effect.data.disabled;
+      const isFromThisItem = effect.origin === item.uuid;
+      const isDisabled = effect.disabled;
       const isTemporary = effect.isTemporary;
 
       return isFromThisItem && isTemporary && isDisabled;
@@ -42,7 +42,7 @@ class ApplySelfEffects5e {
       const actorEffectUpdates = existingDisabledEffects
       .map((effect) => {
         return {
-          _id: effect.data._id,
+          _id: effect.id,
           disabled: false,
         }
       });
@@ -53,7 +53,7 @@ class ApplySelfEffects5e {
     // otherwise, create new temporary effects from the item on the parent actor
     
     const effectsToApply = item.effects.filter((effect) => {
-      return effect.isTemporary && !(effect.data.enabled && effect.data.transfer)
+      return effect.isTemporary && !(effect.enabled && effect.transfer)
       // if the effect is enabled and transferred, we assume it already is on the actor
     });
 
@@ -89,7 +89,7 @@ Hooks.on("ready", async () => {
   console.log(`${ApplySelfEffects5e.MODULE_NAME} | Initializing ${ApplySelfEffects5e.MODULE_TITLE}`);
 
   // initialize item hooks
-  Hooks.on('Item5e.roll', ApplySelfEffects5e.handleItemRoll);
+  Hooks.on('dnd5e.useItem', ApplySelfEffects5e.handleUseItem);
 });
 
 Hooks.once('devModeReady', ({ registerPackageDebugFlag }) => {

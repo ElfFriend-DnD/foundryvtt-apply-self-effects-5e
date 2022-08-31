@@ -1,9 +1,8 @@
 {
-  "name": "apply-self-effects-5e",
+  "id": "apply-self-effects-5e",
   "title": "Apply Self Effects DnD5e",
   "description": "A module which allows a GM to interact with effects on rolled items from chat.",
-  "version": "1.0.2",
-  "author": "Andrew Krigline",
+  "version": "2.0.0",
   "authors": [
     {
       "name": "Andrew Krigline",
@@ -13,20 +12,25 @@
       "patreon": "ElfFriend_DnD"
     }
   ],
-  "system": [ "dnd5e" ],
   "scripts": [
     "./scripts/apply-self-effects-5e.js"
   ],
-  "dependencies": [
-    {
-      "name": "more-hooks-5e"
-    },
-    {
-      "name": "lib-wrapper"
-    }
-  ],
-  "minimumCoreVersion": "0.8.9",
-  "compatibleCoreVersion": "9",
+  "relationships": {
+    "systems": [{
+      "id": "dnd5e",
+      "type": "system",
+      "compatibility": {
+        "minimum": "2.0.0"
+      }
+    }],
+    "requires": [{
+      "id": "lib-wrapper",
+      "type": "module"
+    }]
+  },
+  "compatibility": {
+    "minimum": 10
+  },
   "url": "https://github.com/ElfFriend-DnD/foundryvtt-apply-self-effects-5e",
   "bugs": "https://github.com/ElfFriend-DnD/foundryvtt-apply-self-effects-5e/issues",
   "changelog": "https://github.com/ElfFriend-DnD/foundryvtt-apply-self-effects-5e/releases",
