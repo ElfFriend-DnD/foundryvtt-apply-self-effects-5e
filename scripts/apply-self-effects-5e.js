@@ -9,13 +9,13 @@ class ApplySelfEffects5e {
   }
   
   /**
-   * When an item that targets self is rolled:
+   * When an item that targets self is used:
    * if the parent actor has any disabled temporary effects from this item, activate them
    * otherwise apply any temporary effects to the parent actor
    * @param {*} item 
    * @returns 
    */
-   static handleItemRoll = async (item) => {
+   static handleUseItem = async (item) => {
     if (item.data.data.target?.type !== 'self' || !item.effects.size) {
       return;
     }
@@ -89,7 +89,7 @@ Hooks.on("ready", async () => {
   console.log(`${ApplySelfEffects5e.MODULE_NAME} | Initializing ${ApplySelfEffects5e.MODULE_TITLE}`);
 
   // initialize item hooks
-  Hooks.on('Item5e.roll', ApplySelfEffects5e.handleItemRoll);
+  Hooks.on('dnd5e.useItem', ApplySelfEffects5e.handleUseItem);
 });
 
 Hooks.once('devModeReady', ({ registerPackageDebugFlag }) => {
