@@ -16,7 +16,7 @@ class ApplySelfEffects5e {
    * @returns 
    */
    static handleUseItem = async (item) => {
-    if (item.data.data.target?.type !== 'self' || !item.effects.size) {
+    if (item.system.target?.type !== 'self' || !item.effects.size) {
       return;
     }
 
@@ -29,8 +29,8 @@ class ApplySelfEffects5e {
     this.log('apply this to the parent', item, actor);
 
     const existingDisabledEffects = actor.effects.filter((effect) => {
-      const isFromThisItem = effect.data.origin === item.uuid;
-      const isDisabled = effect.data.disabled;
+      const isFromThisItem = effect.origin === item.uuid;
+      const isDisabled = effect.disabled;
       const isTemporary = effect.isTemporary;
 
       return isFromThisItem && isTemporary && isDisabled;
@@ -42,7 +42,7 @@ class ApplySelfEffects5e {
       const actorEffectUpdates = existingDisabledEffects
       .map((effect) => {
         return {
-          _id: effect.data._id,
+          _id: effect.id,
           disabled: false,
         }
       });
@@ -53,7 +53,7 @@ class ApplySelfEffects5e {
     // otherwise, create new temporary effects from the item on the parent actor
     
     const effectsToApply = item.effects.filter((effect) => {
-      return effect.isTemporary && !(effect.data.enabled && effect.data.transfer)
+      return effect.isTemporary && !(effect.enabled && effect.transfer)
       // if the effect is enabled and transferred, we assume it already is on the actor
     });
 
