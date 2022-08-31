@@ -2,7 +2,7 @@
   "id": "apply-self-effects-5e",
   "title": "Apply Self Effects DnD5e",
   "description": "A module which allows a GM to interact with effects on rolled items from chat.",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "authors": [
     {
       "name": "Andrew Krigline",
